@@ -1,7 +1,17 @@
 function lcm(nums) {
 
+    let factors = nums.map( x => {
+        return prime_factors(x)
+    }).flat()
+    
+    console.log(factors)
+    let lcm = factors.reduce((total, x) => {
+        console.log(total, x)
+        return total * x
+    })
 
-    console.log(nums)
+
+    console.log(lcm)
 	
 }
 
@@ -27,7 +37,7 @@ function is_prime(num) { //checks if a number is prime by comparing the argument
     return true;
 }
 
-lcm([5, 7, 11])
+lcm([1, 2, 3, 4, 5, 6, 7, 8, 9])
 
 /*
 psuedo code
