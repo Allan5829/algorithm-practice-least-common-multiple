@@ -1,14 +1,22 @@
 function lcm(nums) {
 
-    let factors = nums.map( x => {
+    let allFactors = nums.map( x => {
         return prime_factors(x)
     })
     
-    console.log(factors)
+    //console.log(allFactors)
 
-    for (let i = 0; 1 < factors.length; factors.pop()){
-        i = factors.length - 1
-        console.log(factors[i], i)
+    let factors = [];
+    for (let i = 0; 1 < allFactors.length; allFactors.pop()){
+        i = allFactors.length - 1
+        allFactors[i].forEach( x => {
+            if (!factors.includes(x)) { // if the current factor isn't included in factors do stuff
+                console.log(calculateCount(allFactors[i], x))
+            } 
+        })
+
+
+        console.log(allFactors[i])
         
     }
 
@@ -20,8 +28,14 @@ function lcm(nums) {
 
     console.log(lcm)
 */
+}
 
-    
+function calculateCount(array, num) {
+    let count = 0;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === num) count++;
+    }
+    return count
 }
 
 function prime_factors(num) {
