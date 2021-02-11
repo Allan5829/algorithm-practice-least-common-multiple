@@ -4,30 +4,31 @@ function lcm(nums) {
         return prime_factors(x)
     })
     
-    //console.log(allFactors)
+    //console.log(allFactors, )
 
     let factors = [];
+    if (allFactors.length === 1) {
+        factors.push( allFactors.flat()[0] )
+    }
     for (let i = 0; 1 < allFactors.length; allFactors.pop()){
         i = allFactors.length - 1
         allFactors[i].forEach( x => {
             if (!factors.includes(x)) { // if the current factor isn't included in factors do stuff
-                console.log(calculateCount(allFactors[i], x))
+                let repeat = calculateCount(allFactors[i], x) // get how many times the current number is in the array
+                for (let i = 1; i <= repeat; i++) {
+                    factors.push(x)
+                }
             } 
         })
-
-
-        console.log(allFactors[i])
-        
     }
 
-    /*
     let lcm = factors.reduce((total, x) => {
-        console.log(total, x)
+        //console.log(total, x)
         return total * x
     })
 
     console.log(lcm)
-*/
+    return lcm
 }
 
 function calculateCount(array, num) {
@@ -40,6 +41,7 @@ function calculateCount(array, num) {
 
 function prime_factors(num) {
     const primeFactors = [];
+    if (num === 1) primeFactors.push(num);
     for (let i = 2; i <= num; i++) { 
       while (is_prime(i) && num % i === 0) // if i is prime and num/i is a whole number
       {
@@ -58,7 +60,7 @@ function is_prime(num) { //checks if a number is prime by comparing the argument
     return true;
 }
 
-lcm([1, 2, 3, 4, 5, 6, 7, 8, 9])
+lcm([1])
 
 /*
 Current problem, I need to multiply each factor the greatest number of times it occurs in any of the numbers. With the example I'm using
