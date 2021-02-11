@@ -1,10 +1,14 @@
 function lcm(nums) {
 
-    let allFactors = nums.map( x => {
+    let sorted = nums.sort(function(a, b) {
+        return a - b;
+    });
+
+    let allFactors = sorted.map( x => {
         return prime_factors(x)
     })
     
-    //console.log(allFactors, )
+    //console.log(allFactors)
 
     let factors = [];
     if (allFactors.length === 1) {
@@ -23,9 +27,10 @@ function lcm(nums) {
     }
 
     let lcm = factors.reduce((total, x) => {
-        //console.log(total, x)
         return total * x
     })
+
+    // check if the lcm is the actual lcm and if not multiply by 2 until it is because that was the common theme I saw
 
     console.log(lcm)
     return lcm
@@ -60,29 +65,12 @@ function is_prime(num) { //checks if a number is prime by comparing the argument
     return true;
 }
 
-lcm([1])
+lcm([79, 18, 7, 3, 1])
 
 /*
-Current problem, I need to multiply each factor the greatest number of times it occurs in any of the numbers. With the example I'm using
-    2 and 3 are factors in 3 numbers
-
-One idea is to create a loop and that inserts the last group of factors and if those factors appear in another group then don't include
-    that specific number. 
-
-May not work but that's my current thought process.
-    
-
-
-
-psuedo code
-find prime numbers for current index and multiply for least common multiple
-
-step 1 get prime factors
-
 examples
 lcm([1, 2, 3, 4, 5, 6, 7, 8, 9]) ➞ 2520
 lcm([5]) ➞ 5
 lcm([5, 7, 11]) ➞ 385
 lcm([5, 7, 11, 35, 55, 77]) ➞ 385
-
 */
