@@ -26,11 +26,21 @@ function lcm(nums) {
         })
     }
 
-    let lcm = factors.reduce((total, x) => {
+    let currentLcm = factors.reduce((total, x) => {
         return total * x
     })
 
     // check if the lcm is the actual lcm and if not multiply by 2 until it is because that was the common theme I saw
+    let lcm = 0;
+    function checkLcm(array, num) {
+        let check = array.every( x => {return num%x === 0})
+        if(check) {
+            lcm = num
+        } else {
+            checkLcm(array, num*2)
+        }
+    }
+    checkLcm(sorted, currentLcm)
 
     console.log(lcm)
     return lcm
@@ -65,7 +75,7 @@ function is_prime(num) { //checks if a number is prime by comparing the argument
     return true;
 }
 
-lcm([79, 18, 7, 3, 1])
+lcm([67, 34, 12, 3, 2])
 
 /*
 examples
