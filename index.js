@@ -10,7 +10,6 @@ function lcm(nums) {
         return prime_factors(x)
     })
 
-    console.log(allFactors)
     let factors = [];
 
     // If argument is 1 value and a prime number
@@ -20,7 +19,6 @@ function lcm(nums) {
 
     // Loop is responsible for populating factors array.
     // Only pushes least amount of needed factors for least common multiple.
-    // Need to edit to account for all prime numbers.
     for (let i = 0; 1 < allFactors.length; allFactors.shift()){
         allFactors[i].forEach( x => {
             if (!factors.includes(x)) { // if the current factor isn't included in factors do stuff
@@ -28,26 +26,22 @@ function lcm(nums) {
                 for (let i = 1; i <= repeat; i++) {
                     factors.push(x)
                 }
-            } 
+            } else {
+                let currentCount = calculateCount(factors, x)
+                let newCount = calculateCount(allFactors[i], x)
+                if (currentCount !== newCount) {
+                    let times = newCount - currentCount
+                    for (let i = 1; i <= times; i++) {
+                        factors.push(x)
+                    }
+                }
+            }
         })
     }
 
-    let currentLcm = factors.reduce((total, x) => {
+    let result = factors.reduce((total, x) => {
         return total * x
     })
-
-    let result = 0;
-    // Checks if the currentLcm has any remainders greater than 0 when divided by each of the indvidual arguments.
-    // Placed function inside so it has access to a variable that will be our result.
-    function checkLcm(array, num) { 
-        let check = array.every( x => {return num%x === 0})
-        if(check) {
-            result = num
-        } else {
-            checkLcm(array, num*2)
-        }
-    }
-    checkLcm(sorted, currentLcm)
 
     console.log(result)
     return result
